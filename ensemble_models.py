@@ -10,7 +10,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
 
 
-def model_init(random_seed: int = 843) -> RandomForestClassifier:
+def model_init(random_seed: int = 42) -> RandomForestClassifier:
     """Необученный random forest с параметрами под маленький датасет"""
     return RandomForestClassifier(
         n_estimators=300,
