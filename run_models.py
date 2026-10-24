@@ -51,9 +51,7 @@ def run_contract_model(features_train, features_test, target_train, target_test)
 
 
 def save_results(contract_result, experiments):
-    """логирует метрики контрактной модели + история перебора CONFIGS"""
-    # лучшая по test ROC-AUC — только справка, НЕ критерий выбора модели
-    best_by_test = max(experiments, key=lambda row: row["roc_auc"])
+    """Логирует метрики контрактной модели + история перебора CONFIGS"""
     with open("experiment_results.json", "w", encoding="utf-8") as f:
         json.dump({
             # метрики контрактной модели (их ждёт проверка)
@@ -65,13 +63,6 @@ def save_results(contract_result, experiments):
             "f1": contract_result.f1,
             "random_seed": SEED,
             "split": {"test_size": 0.2, "stratify": True, "random_state": SEED},
-            # справка: какая конфигурация дала лучший test ROC-AUC (не выбор!)
-            "best_by_test_roc_auc": {
-                "max_depth": best_by_test["max_depth"],
-                "min_samples_leaf": best_by_test["min_samples_leaf"],
-                "roc_auc": best_by_test["roc_auc"],
-                "note": "справочно; выбор модели по test недопустим",
-            },
             # история перебора
             "experiments": experiments,
         }, f, indent=2, ensure_ascii=False)

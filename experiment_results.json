@@ -11,12 +11,6 @@
     "stratify": true,
     "random_state": 42
   },
-  "best_by_test_roc_auc": {
-    "max_depth": 8,
-    "min_samples_leaf": 5,
-    "roc_auc": 0.8402,
-    "note": "справочно; выбор модели по test недопустим"
-  },
   "experiments": [
     {
       "max_depth": 4,
