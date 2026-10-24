@@ -1,7 +1,21 @@
+import json
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from grader_contracts.ensembles import EnsembleInput
+from grader_contracts.ensembles import EnsembleInput, EnsembleResult
 from ensemble_models import run_ensemble_experiment
+
+
+def output_results(result: EnsembleResult):
+    with open("experiment_results.json", "w", encoding="utf-8") as f:
+        json.dump({
+            "model_name": result.model_name,
+            "roc_auc": result.roc_auc,
+            "accuracy": result.accuracy,
+            "precision": result.precision,
+            "recall": result.recall,
+            "f1": result.f1,
+        }, f, indent=2, ensure_ascii=False)
+
 
 if __name__ == "__main__":
     df = pd.read_csv("./german.csv", sep=';')
@@ -22,10 +36,4 @@ if __name__ == "__main__":
     )
 
     result = run_ensemble_experiment(data)
-
-    print(f"model:    {result.model_name}")
-    print(f"ROC-AUC:  {result.roc_auc:.4f}")
-    print(f"Accuracy: {result.accuracy:.4f}")
-    print(f"Precision:{result.precision:.4f}")
-    print(f"Recall:   {result.recall:.4f}")
-    print(f"F1:       {result.f1:.4f}")
+    output_results(result)

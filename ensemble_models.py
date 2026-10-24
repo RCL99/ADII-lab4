@@ -8,7 +8,6 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
-from sklearn.preprocessing import OneHotEncoder
 
 
 def model_init(random_seed: int = 843) -> RandomForestClassifier:
